@@ -6,11 +6,14 @@ const store = require('./src/store');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const IS_VERCEL = Boolean(process.env.VERCEL);
 
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const UPLOADS_DIR = path.join(PUBLIC_DIR, 'uploads');
 
-fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+if (!IS_VERCEL) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
 store.initStore();
 
 app.disable('x-powered-by');
@@ -23,7 +26,7 @@ app.use((_req, res, next) => {
   next();
 });
 
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({ limit: '6mb' }));
 app.use(express.static(PUBLIC_DIR));
 
 // Simple sliding-window in-memory rate limiter
@@ -62,23 +65,25 @@ const MIME_TO_EXT = {
   'image/webp': '.webp'
 };
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOADS_DIR),
-  filename: (_req, file, cb) => {
-    const ext = MIME_TO_EXT[file.mimetype] || '.jpg';
-    const rawBase = path.basename(file.originalname || 'foto', path.extname(file.originalname || ''));
-    const safeBase = rawBase
-      .toLowerCase()
-      .replace(/[^a-z0-9-_]+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .slice(0, 32);
-    cb(null, `${safeBase || 'foto'}-${Date.now()}${ext}`);
-  }
-});
+const storage = IS_VERCEL
+  ? multer.memoryStorage()
+  : multer.diskStorage({
+      destination: (_req, _file, cb) => cb(null, UPLOADS_DIR),
+      filename: (_req, file, cb) => {
+        const ext = MIME_TO_EXT[file.mimetype] || '.jpg';
+        const rawBase = path.basename(file.originalname || 'foto', path.extname(file.originalname || ''));
+        const safeBase = rawBase
+          .toLowerCase()
+          .replace(/[^a-z0-9-_]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 32);
+        cb(null, `${safeBase || 'foto'}-${Date.now()}${ext}`);
+      }
+    });
 
 const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  limits: { fileSize: IS_VERCEL ? 4 * 1024 * 1024 : 10 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     if (MIME_TO_EXT[file.mimetype]) {
       cb(null, true);
@@ -187,6 +192,14 @@ app.post('/api/admin/upload', requireAdmin, (req, res) => {
     }
     if (!req.file) {
       return res.status(400).json({ error: 'Tidak ada file gambar yang dikirim.' });
+    }
+    if (IS_VERCEL && req.file.buffer) {
+      const dataUrl = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+      return res.status(201).json({
+        url: dataUrl,
+        filename: req.file.originalname || 'upload',
+        size: req.file.size
+      });
     }
     res.status(201).json({
       url: '/uploads/' + req.file.filename,

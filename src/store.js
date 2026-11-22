@@ -1,9 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 const crypto = require('crypto');
 const defaultConfig = require('./defaultConfig');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
+const IS_VERCEL = Boolean(process.env.VERCEL);
+const BUNDLED_DATA_DIR = path.join(__dirname, '..', 'data');
+const DATA_DIR = IS_VERCEL ? path.join(os.tmpdir(), 'da-data') : BUNDLED_DATA_DIR;
 const CONFIG_FILE = path.join(DATA_DIR, 'site-config.json');
 const BOOKINGS_FILE = path.join(DATA_DIR, 'bookings.json');
 const AUTH_FILE = path.join(DATA_DIR, 'auth.json');
@@ -14,6 +17,7 @@ const DEFAULT_ADMIN_PASSWORD = process.env.DA_ADMIN_PASSWORD || 'da-admin-2026';
 const SESSION_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
 const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+const DATA_IMAGE_RE = /^data:image\/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=]+$/;
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) {
@@ -42,13 +46,15 @@ function sanitizeString(val, maxLen = 500, fallback = '') {
 }
 
 function sanitizeImageUrl(url, fallback = '/uploads/hero-jamuan.jpg') {
-  const s = sanitizeString(url, 600, '');
+  if (typeof url !== 'string') return fallback;
+  const s = url.trim();
   if (!s) return fallback;
-  if (s.startsWith('/uploads/') || s.startsWith('/assets/')) return s;
+  if (s.startsWith('/uploads/') || s.startsWith('/assets/')) return s.slice(0, 600);
+  if (DATA_IMAGE_RE.test(s) && s.length <= 6 * 1024 * 1024) return s;
   try {
     const parsed = new URL(s);
     if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
-      return s;
+      return s.slice(0, 600);
     }
   } catch {
     // invalid URL
@@ -249,7 +255,8 @@ function initStore() {
   ensureDataDir();
 
   if (!fs.existsSync(CONFIG_FILE)) {
-    writeJsonAtomic(CONFIG_FILE, normalizeConfig(defaultConfig));
+    const bundled = readJsonSafe(path.join(BUNDLED_DATA_DIR, 'site-config.json'), null);
+    writeJsonAtomic(CONFIG_FILE, normalizeConfig(bundled || defaultConfig));
   }
 
   if (!fs.existsSync(BOOKINGS_FILE)) {
@@ -435,17 +442,39 @@ function getAuthRecord() {
   return readJsonSafe(AUTH_FILE, null);
 }
 
+function signStatelessToken(expiresAt, salt) {
+  const secret = (process.env.DA_SESSION_SECRET || 'da-mvp-session-key') + ':' + salt;
+  const nonce = crypto.randomBytes(12).toString('hex');
+  const payload = `${expiresAt}.${nonce}`;
+  const sig = crypto.createHmac('sha256', secret).update(payload).digest('hex');
+  return `v1.${payload}.${sig}`;
+}
+
+function verifyStatelessToken(token, salt) {
+  const parts = String(token || '').split('.');
+  if (parts.length !== 4 || parts[0] !== 'v1') return false;
+  const [, expStr, nonce, sig] = parts;
+  const exp = Number(expStr);
+  if (!Number.isFinite(exp) || Date.now() > exp) return false;
+  const secret = (process.env.DA_SESSION_SECRET || 'da-mvp-session-key') + ':' + salt;
+  const expectedSig = crypto.createHmac('sha256', secret).update(`${expStr}.${nonce}`).digest('hex');
+  const a = Buffer.from(sig, 'utf8');
+  const b = Buffer.from(expectedSig, 'utf8');
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
 function loginAdmin(password) {
   const auth = getAuthRecord();
   if (!auth || !verifyPassword(String(password || ''), auth.salt, auth.hash)) {
     return null;
   }
-  const token = crypto.randomBytes(32).toString('hex');
+  const expiresAt = Date.now() + SESSION_TTL_MS;
+  const token = IS_VERCEL
+    ? signStatelessToken(expiresAt, auth.salt)
+    : crypto.randomBytes(32).toString('hex');
   const sessions = loadSessions();
-  sessions[token] = {
-    createdAt: Date.now(),
-    expiresAt: Date.now() + SESSION_TTL_MS
-  };
+  sessions[token] = { createdAt: Date.now(), expiresAt };
   saveSessions(sessions);
   return { token, isDefaultPassword: Boolean(auth.isDefaultPassword) };
 }
@@ -454,8 +483,16 @@ function validateSession(token) {
   if (!token) return false;
   const sessions = loadSessions();
   const session = sessions[token];
-  if (!session) return false;
-  return Date.now() <= session.expiresAt;
+  if (session) {
+    return Date.now() <= session.expiresAt;
+  }
+  if (IS_VERCEL) {
+    const auth = getAuthRecord();
+    if (auth && verifyStatelessToken(token, auth.salt)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function logoutSession(token) {

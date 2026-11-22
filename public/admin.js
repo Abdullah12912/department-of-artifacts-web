@@ -94,6 +94,7 @@
     const s = String(url || '').trim();
     if (!s) return fallback;
     if (s.startsWith('/uploads/') || s.startsWith('/assets/')) return s;
+    if (/^data:image\/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(s)) return s;
     try {
       const parsed = new URL(s);
       if (parsed.protocol === 'https:' || parsed.protocol === 'http:') return s;
