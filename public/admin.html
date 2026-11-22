@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin — Department of Artifacts (D/A)</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/da_logomark_avatar.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-topbar">
+        <span>FORM D/A-AUTH</span>
+        <span>AKSES KURATOR</span>
+      </div>
+      <div class="login-body">
+        <div class="login-brand">
+          <svg viewBox="0 0 512 512" aria-hidden="true">
+            <circle cx="256" cy="256" r="248" fill="#24140C"/>
+            <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+            <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+          </svg>
+          <div>
+            <h1>Panel Admin D/A</h1>
+            <p>Kustomisasi situs &amp; manajemen berkas pengajuan.</p>
+          </div>
+        </div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="loginPassword">Kata Sandi Admin</label>
+            <input type="password" id="loginPassword" placeholder="Masukkan kata sandi..." required autocomplete="current-password">
+          </div>
+          <div id="loginError" class="login-error hidden"></div>
+          <div style="margin-top: 16px; display: flex; gap: 10px; align-items: center;">
+            <button type="submit" class="btn btn-primary" style="flex:1;">Masuk Panel Admin</button>
+            <a href="/" class="btn">← Web</a>
+          </div>
+        </form>
+
+        <div id="defaultPassHint" class="login-hint hidden">
+          <strong>Info MVP:</strong> Kata sandi bawaan adalah <code>da-admin-2026</code>. Anda dapat menggantinya di menu <em>Pengaturan</em> setelah masuk.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin Shell -->
+  <div id="adminShell" class="admin-shell hidden">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <circle cx="256" cy="256" r="244" fill="#F3E9D2"/>
+          <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#24140C"/>
+          <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+        </svg>
+        <div>
+          <div class="sidebar-title">D/A Admin</div>
+          <div class="sidebar-sub">FORM D/A-ADM · CMS</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" id="sidebarNav">
+        <button type="button" class="nav-item active" data-tab="overview"><span>00 · Ringkasan</span></button>
+        <button type="button" class="nav-item" data-tab="brand"><span>01 · Identitas &amp; Kontak</span></button>
+        <button type="button" class="nav-item" data-tab="theme"><span>02 · Tampilan &amp; Warna</span></button>
+        <button type="button" class="nav-item" data-tab="hero"><span>03 · Hero &amp; Alur Kerja</span></button>
+        <button type="button" class="nav-item" data-tab="archives"><span>04 · Katalog Arsip</span></button>
+        <button type="button" class="nav-item" data-tab="services"><span>05 · Layanan &amp; Paket</span></button>
+        <button type="button" class="nav-item" data-tab="bookings">
+          <span>06 · Pengajuan Masuk</span>
+          <span class="nav-badge hidden" id="newBookingsBadge">0</span>
+        </button>
+        <button type="button" class="nav-item" data-tab="settings"><span>07 · Pengaturan</span></button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <a href="/" target="_blank" class="btn btn-sm">Buka Web Live ↗</a>
+        <button type="button" class="btn btn-sm" id="logoutBtn">Keluar Sesi</button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn btn-sm mobile-nav-btn" id="mobileSidebarBtn">Menu</button>
+          <h1 class="topbar-title" id="topbarTitle">00 · Ringkasan</h1>
+          <span class="dirty-pill hidden" id="dirtyBadge">Belum Disimpan</span>
+        </div>
+        <div class="topbar-actions">
+          <button type="button" class="btn btn-sm" id="openPreviewBtn">Pratinjau Live</button>
+          <button type="button" class="btn btn-accent btn-sm" id="saveAllBtn">Simpan Perubahan</button>
+        </div>
+      </header>
+
+      <main class="content-wrap">
+
+        <!-- TAB 00: OVERVIEW -->
+        <section class="tab-panel" id="tab-overview">
+          <div class="stats-grid" id="statsGrid"></div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Pengajuan Terbaru</h2>
+              <button type="button" class="btn btn-sm" data-goto-tab="bookings">Lihat Semua →</button>
+            </div>
+            <div class="panel-body" id="recentBookingsBox"></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Pintasan Kustomisasi Cepat</h2>
+            </div>
+            <div class="panel-body" style="display:flex; flex-wrap:wrap; gap:10px;">
+              <button type="button" class="btn btn-sm" data-goto-tab="brand">Ubah Kontak &amp; Kota</button>
+              <button type="button" class="btn btn-sm" data-goto-tab="theme">Ganti Palet Warna</button>
+              <button type="button" class="btn btn-sm" data-goto-tab="archives">Kelola Foto Arsip</button>
+              <button type="button" class="btn btn-sm" data-goto-tab="services">Atur Harga Paket</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 01: BRAND & CONTACT -->
+        <section class="tab-panel hidden" id="tab-brand">
+          <div class="panel">
+            <div class="panel-head"><h2>Identitas Merek</h2></div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label>Nama Studio / Merek</label>
+                  <input type="text" data-bind="brand.name">
+                </div>
+                <div class="field">
+                  <label>Nama Pendek (Navbar)</label>
+                  <input type="text" data-bind="brand.shortName">
+                </div>
+                <div class="field">
+                  <label>Monogram Kiri (Contoh: D)</label>
+                  <input type="text" maxlength="3" data-bind="brand.monogramLeft">
+                </div>
+                <div class="field">
+                  <label>Monogram Kanan (Contoh: A)</label>
+                  <input type="text" maxlength="3" data-bind="brand.monogramRight">
+                </div>
+                <div class="field">
+                  <label>Kode Form Strip Atas</label>
+                  <input type="text" data-bind="brand.formCode">
+                </div>
+                <div class="field">
+                  <label>Subjudul Strip Atas</label>
+                  <input type="text" data-bind="brand.subtitle">
+                </div>
+                <div class="field full">
+                  <label>Deskripsi SEO (Meta Description)</label>
+                  <textarea rows="2" data-bind="brand.metaDescription"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Kontak &amp; Basis Operasi</h2></div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label>Kota Utama</label>
+                  <input type="text" data-bind="brand.city">
+                </div>
+                <div class="field">
+                  <label>Area Layanan</label>
+                  <input type="text" data-bind="brand.serviceArea">
+                </div>
+                <div class="field">
+                  <label>Handle Instagram (tanpa @)</label>
+                  <input type="text" data-bind="brand.instagram">
+                </div>
+                <div class="field">
+                  <label>Nomor WhatsApp Tampil</label>
+                  <input type="text" data-bind="brand.whatsapp" placeholder="0812-3456-7890">
+                </div>
+                <div class="field">
+                  <label>Nomor WhatsApp Link (Format 628...)</label>
+                  <input type="text" data-bind="brand.whatsappNumber" placeholder="6281234567890">
+                  <span class="field-hint">Dipakai untuk tombol "Kirim ke WhatsApp" pada resi booking.</span>
+                </div>
+                <div class="field">
+                  <label>Email Studio</label>
+                  <input type="email" data-bind="brand.email">
+                </div>
+                <div class="field full">
+                  <label>Jam Operasional / Balasan</label>
+                  <input type="text" data-bind="brand.hours">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 02: THEME & LAYOUT -->
+        <section class="tab-panel hidden" id="tab-theme">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Preset Palet Identitas</h2>
+              <button type="button" class="btn btn-sm" id="resetThemeBtn">Reset ke Standar D/A</button>
+            </div>
+            <div class="panel-body">
+              <div class="preset-grid" id="themePresets"></div>
+
+              <div class="form-grid-3">
+                <div class="field">
+                  <label>Latar Utama (Krem Berkas)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.cream">
+                    <input type="text" data-bind="theme.cream">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Kertas Kartu (Paper)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.paper">
+                    <input type="text" data-bind="theme.paper">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Teks &amp; Garis (Cokelat Tinta)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.ink">
+                    <input type="text" data-bind="theme.ink">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Teks Sekunder (Ink Muted)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.inkMuted">
+                    <input type="text" data-bind="theme.inkMuted">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Aksen Utama (Oranye Arsip)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.orange">
+                    <input type="text" data-bind="theme.orange">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Aksen Gelap (Hover)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.orangeDark">
+                    <input type="text" data-bind="theme.orangeDark">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Aksen Sekunder (Biru Kosmik)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.blue">
+                    <input type="text" data-bind="theme.blue">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Highlight (Kuning Sinyal)</label>
+                  <div class="color-field">
+                    <input type="color" data-color="theme.yellow">
+                    <input type="text" data-bind="theme.yellow">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Radius Sudut (px: <span id="radiusVal">4</span>px)</label>
+                  <input type="range" min="0" max="16" step="1" id="radiusRange" style="margin-top:8px; accent-color:var(--orange);">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Visibilitas Bagian Halaman</h2></div>
+            <div class="panel-body">
+              <div class="toggle-list">
+                <label class="toggle-item">
+                  <span><strong>Hero &amp; Sampul Utama</strong></span>
+                  <input type="checkbox" data-toggle="sections.hero">
+                </label>
+                <label class="toggle-item">
+                  <span><strong>01 · Katalog Arsip</strong></span>
+                  <input type="checkbox" data-toggle="sections.archives">
+                </label>
+                <label class="toggle-item">
+                  <span><strong>02 · Layanan &amp; Paket</strong></span>
+                  <input type="checkbox" data-toggle="sections.services">
+                </label>
+                <label class="toggle-item">
+                  <span><strong>03 · Alur Kerja &amp; Kutipan</strong></span>
+                  <input type="checkbox" data-toggle="sections.process">
+                </label>
+                <label class="toggle-item">
+                  <span><strong>04 · Formulir Pengajuan Jadwal</strong></span>
+                  <input type="checkbox" data-toggle="sections.booking">
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 03: HERO & PROCESS -->
+        <section class="tab-panel hidden" id="tab-hero">
+          <div class="panel">
+            <div class="panel-head"><h2>Konten Hero Utama</h2></div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label>Kicker</label>
+                  <input type="text" data-bind="hero.kicker">
+                </div>
+                <div class="field">
+                  <label>Teks Watermark Foto</label>
+                  <input type="text" data-bind="hero.watermark">
+                </div>
+                <div class="field full">
+                  <label>Judul Besar (Headline)</label>
+                  <input type="text" data-bind="hero.headline">
+                </div>
+                <div class="field full">
+                  <label>Deskripsi Singkat</label>
+                  <textarea rows="3" data-bind="hero.description"></textarea>
+                </div>
+                <div class="field">
+                  <label>Tombol CTA Utama</label>
+                  <input type="text" data-bind="hero.primaryCta">
+                </div>
+                <div class="field">
+                  <label>Tombol CTA Sekunder</label>
+                  <input type="text" data-bind="hero.secondaryCta">
+                </div>
+                <div class="field full">
+                  <label>Foto Utama Hero</label>
+                  <div class="image-upload-row">
+                    <div class="image-preview-box">
+                      <img id="heroPreviewImg" src="" alt="Preview Hero">
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                      <input type="text" data-bind="hero.image" placeholder="/uploads/hero-jamuan.jpg atau URL">
+                      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                        <label class="btn btn-sm" style="cursor:pointer;">
+                          Unggah Foto Baru
+                          <input type="file" id="heroImageFile" accept="image/jpeg,image/png,image/webp" class="hidden">
+                        </label>
+                        <span class="field-hint">JPG/PNG/WEBP, maks 10MB.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Caption Kiri Bawah</label>
+                  <input type="text" data-bind="hero.captionLeft">
+                </div>
+                <div class="field">
+                  <label>Caption Kanan Bawah</label>
+                  <input type="text" data-bind="hero.captionRight">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>03 · Alur Kerja &amp; Suara Merek</h2></div>
+            <div class="panel-body">
+              <div class="form-grid" style="margin-bottom:20px;">
+                <div class="field">
+                  <label>Judul Seksi</label>
+                  <input type="text" data-bind="processSection.title">
+                </div>
+                <div class="field">
+                  <label>Stempel Banner</label>
+                  <input type="text" data-bind="processSection.stamp">
+                </div>
+                <div class="field full">
+                  <label>Deskripsi Seksi</label>
+                  <textarea rows="2" data-bind="processSection.description"></textarea>
+                </div>
+                <div class="field full">
+                  <label>Kutipan Brand Voice (Banner Gelap)</label>
+                  <textarea rows="2" data-bind="processSection.quote"></textarea>
+                </div>
+              </div>
+              <div id="processStepsEditor"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 04: ARCHIVES / PORTFOLIO -->
+        <section class="tab-panel hidden" id="tab-archives">
+          <div class="panel">
+            <div class="panel-head"><h2>Pengaturan Seksi Katalog</h2></div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label>Judul Seksi</label>
+                  <input type="text" data-bind="archiveSection.title">
+                </div>
+                <div class="field">
+                  <label>Kategori Filter (pisahkan koma)</label>
+                  <input type="text" id="archiveCategoriesInput" placeholder="Wisuda, Wedding, Event">
+                </div>
+                <div class="field full">
+                  <label>Deskripsi Seksi</label>
+                  <textarea rows="2" data-bind="archiveSection.description"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Daftar Berkas Arsip (<span id="archivesTotalLabel">0</span>)</h2>
+              <button type="button" class="btn btn-primary btn-sm" id="addArchiveBtn">+ Tambah Arsip</button>
+            </div>
+            <div class="panel-body">
+              <div class="admin-cards-grid" id="adminArchivesGrid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 05: SERVICES & BOOKING -->
+        <section class="tab-panel hidden" id="tab-services">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Daftar Layanan &amp; Paket</h2>
+              <button type="button" class="btn btn-primary btn-sm" id="addServiceBtn">+ Tambah Paket</button>
+            </div>
+            <div class="panel-body">
+              <div class="form-grid" style="margin-bottom:20px;">
+                <div class="field">
+                  <label>Judul Seksi Layanan</label>
+                  <input type="text" data-bind="servicesSection.title">
+                </div>
+                <div class="field">
+                  <label>Deskripsi Seksi Layanan</label>
+                  <input type="text" data-bind="servicesSection.description">
+                </div>
+              </div>
+              <div class="admin-cards-grid" id="adminServicesGrid"></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Pengaturan Formulir Pengajuan &amp; Add-ons</h2></div>
+            <div class="panel-body">
+              <div class="form-grid">
+                <div class="field">
+                  <label>Judul Seksi Booking</label>
+                  <input type="text" data-bind="bookingSection.title">
+                </div>
+                <div class="field">
+                  <label>Judul Box Informasi</label>
+                  <input type="text" data-bind="bookingSection.infoTitle">
+                </div>
+                <div class="field full">
+                  <label>Deskripsi Box Informasi</label>
+                  <textarea rows="2" data-bind="bookingSection.infoDescription"></textarea>
+                </div>
+                <div class="field">
+                  <label>Label Tombol Submit</label>
+                  <input type="text" data-bind="bookingSection.submitLabel">
+                </div>
+                <div class="field">
+                  <label>Teks Bantuan di Samping Tombol</label>
+                  <input type="text" data-bind="bookingSection.helperText">
+                </div>
+                <div class="field full">
+                  <label>Daftar Tambahan Opsional (1 item per baris)</label>
+                  <textarea rows="4" id="bookingAddonsInput"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB 06: BOOKINGS INBOX -->
+        <section class="tab-panel hidden" id="tab-bookings">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Berkas Pengajuan Klien</h2>
+              <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                <select id="bookingStatusFilter" style="padding:6px 10px; background:var(--cream); border:1.5px solid var(--ink); font-size:12px;">
+                  <option value="ALL">Semua Status</option>
+                  <option value="BARU">BARU</option>
+                  <option value="DIKONFIRMASI">DIKONFIRMASI</option>
+                  <option value="SELESAI">SELESAI</option>
+                  <option value="DIBATALKAN">DIBATALKAN</option>
+                </select>
+                <button type="button" class="btn btn-sm" id="refreshBookingsBtn">Muat Ulang</button>
+              </div>
+            </div>
+            <div class="panel-body" id="bookingsListWrap"></div>
+          </div>
+        </section>
+
+        <!-- TAB 07: SETTINGS & BACKUP -->
+        <section class="tab-panel hidden" id="tab-settings">
+          <div class="panel">
+            <div class="panel-head"><h2>Ubah Kata Sandi Admin</h2></div>
+            <div class="panel-body">
+              <form id="passwordForm" class="form-grid">
+                <div class="field">
+                  <label>Kata Sandi Saat Ini</label>
+                  <input type="password" id="currentPassword" required>
+                </div>
+                <div class="field">
+                  <label>Kata Sandi Baru (Min. 6 karakter)</label>
+                  <input type="password" id="newPassword" required minlength="6">
+                </div>
+                <div class="field full">
+                  <button type="submit" class="btn btn-primary btn-sm" style="width:fit-content;">Perbarui Kata Sandi</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h2>Cadangan (Backup) &amp; Reset Konfigurasi</h2></div>
+            <div class="panel-body" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+              <button type="button" class="btn btn-sm" id="exportConfigBtn">Ekspor JSON Konfigurasi</button>
+              <label class="btn btn-sm" style="cursor:pointer;">
+                Impor JSON Konfigurasi
+                <input type="file" id="importConfigFile" accept="application/json" class="hidden">
+              </label>
+              <button type="button" class="btn btn-danger btn-sm" id="resetAllConfigBtn">Reset ke Bawaan D/A</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Archive Editor Modal -->
+  <div class="modal-backdrop" id="archiveEditorModal">
+    <div class="modal-card">
+      <div class="modal-bar">
+        <span id="archiveModalHeading">Edit Berkas Arsip</span>
+        <button type="button" class="btn btn-sm" style="color:var(--cream); border-color:rgba(243,233,210,0.4);" id="closeArchiveModalBtn">Tutup</button>
+      </div>
+      <div class="modal-body">
+        <form id="archiveEditorForm" class="form-grid">
+          <input type="hidden" id="arcIndex">
+          <div class="field">
+            <label>Nomor Arsip (Contoh: 0045)</label>
+            <input type="text" id="arcId" required>
+          </div>
+          <div class="field">
+            <label>Kategori</label>
+            <input type="text" id="arcCategory" list="categorySuggestions" required>
+            <datalist id="categorySuggestions"></datalist>
+          </div>
+          <div class="field full">
+            <label>Judul Sesi</label>
+            <input type="text" id="arcTitle" required>
+          </div>
+          <div class="field">
+            <label>Lokasi</label>
+            <input type="text" id="arcLocation" required>
+          </div>
+          <div class="field">
+            <label>Catatan Cahaya / Film</label>
+            <input type="text" id="arcLight">
+          </div>
+          <div class="field full">
+            <label>Ringkasan Kartu (Excerpt)</label>
+            <textarea rows="2" id="arcExcerpt"></textarea>
+          </div>
+          <div class="field full">
+            <label>Catatan Lapangan Lengkap (Modal Detail)</label>
+            <textarea rows="3" id="arcNotes"></textarea>
+          </div>
+          <div class="field full">
+            <label>Foto Arsip</label>
+            <div class="image-upload-row">
+              <div class="image-preview-box">
+                <img id="arcPreviewImg" src="" alt="Preview">
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <input type="text" id="arcImage" placeholder="/uploads/... atau URL gambar" required>
+                <label class="btn btn-sm" style="width:fit-content; cursor:pointer;">
+                  Unggah Foto
+                  <input type="file" id="arcImageFile" accept="image/jpeg,image/png,image/webp" class="hidden">
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="field full">
+            <label class="toggle-item" style="width:fit-content; gap:16px;">
+              <span>Tampilkan di Web Publik</span>
+              <input type="checkbox" id="arcVisible" checked>
+            </label>
+          </div>
+          <div class="field full" style="display:flex; flex-direction:row; gap:10px; justify-content:flex-end;">
+            <button type="button" class="btn btn-sm" id="cancelArchiveModalBtn">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan ke Daftar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Service Editor Modal -->
+  <div class="modal-backdrop" id="serviceEditorModal">
+    <div class="modal-card">
+      <div class="modal-bar">
+        <span id="serviceModalHeading">Edit Paket Layanan</span>
+        <button type="button" class="btn btn-sm" style="color:var(--cream); border-color:rgba(243,233,210,0.4);" id="closeServiceModalBtn">Tutup</button>
+      </div>
+      <div class="modal-body">
+        <form id="serviceEditorForm" class="form-grid">
+          <input type="hidden" id="srvIndex">
+          <div class="field">
+            <label>Kode Form (Contoh: FORM D/A-WSD)</label>
+            <input type="text" id="srvFormCode" required>
+          </div>
+          <div class="field">
+            <label>Label Badge (Contoh: ARSIP UTAMA)</label>
+            <input type="text" id="srvBadge" required>
+          </div>
+          <div class="field">
+            <label>Nama Paket</label>
+            <input type="text" id="srvName" required>
+          </div>
+          <div class="field">
+            <label>Harga / Estimasi Tarif</label>
+            <input type="text" id="srvPrice" placeholder="Mulai Rp 1.500.000" required>
+          </div>
+          <div class="field full">
+            <label>Deskripsi Singkat</label>
+            <textarea rows="2" id="srvDesc"></textarea>
+          </div>
+          <div class="field full">
+            <label>Daftar Fasilitas (1 poin per baris)</label>
+            <textarea rows="5" id="srvFeatures"></textarea>
+          </div>
+          <div class="field">
+            <label>Label Tombol CTA</label>
+            <input type="text" id="srvCta" placeholder="Pilih Sesi ...">
+          </div>
+          <div class="field">
+            <label>Sorotan (Highlight Oranye)</label>
+            <label class="toggle-item">
+              <span>Jadikan Paket Utama</span>
+              <input type="checkbox" id="srvFeatured">
+            </label>
+          </div>
+          <div class="field full" style="display:flex; flex-direction:row; gap:10px; justify-content:flex-end;">
+            <button type="button" class="btn btn-sm" id="cancelServiceModalBtn">Batal</button>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan Paket</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Preview Modal -->
+  <div class="modal-backdrop" id="previewModal">
+    <div class="modal-card preview-modal">
+      <div class="modal-bar">
+        <span>PRATINJAU LIVE · MENAMPILKAN PERUBAHAN SAAT INI (TERMASUK YANG BELUM DISIMPAN)</span>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-sm" style="color:var(--cream); border-color:rgba(243,233,210,0.4);" id="previewDesktopBtn">Desktop</button>
+          <button type="button" class="btn btn-sm" style="color:var(--cream); border-color:rgba(243,233,210,0.4);" id="previewMobileBtn">Mobile</button>
+          <button type="button" class="btn btn-sm" style="color:var(--cream); border-color:rgba(243,233,210,0.4);" id="closePreviewBtn">Tutup</button>
+        </div>
+      </div>
+      <div style="flex:1; display:flex; justify-content:center; background:#1c1410; overflow:hidden;">
+        <iframe id="previewIframe" class="preview-iframe" src="about:blank" title="Pratinjau Situs"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

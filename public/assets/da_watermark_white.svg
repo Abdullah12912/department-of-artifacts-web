@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 100" width="640" height="100" role="img" aria-label="Department of Artifacts Photo Watermark">
+  <title>Department of Artifacts — White Transparent Photo Watermark</title>
+  <defs>
+    <mask id="folder-dot-cutout">
+      <rect width="640" height="100" fill="white"/>
+      <circle cx="58" cy="44" r="4.8" fill="black"/>
+    </mask>
+  </defs>
+  <!-- Minimalist white archival folder icon with transparent index dot cutout -->
+  <path d="M22 28 H38 C40 28 41.5 29 42.5 30.8 L44.2 33.4 C44.8 34.4 45.8 35 47.2 35 H68 C70 35 71.5 36.5 71.5 38.5 V67.5 C71.5 69.5 70 71 68 71 H22 C20 71 18.5 69.5 18.5 67.5 V31.5 C18.5 29.5 20 28 22 28 Z" fill="#FFFFFF" fill-opacity="0.92" mask="url(#folder-dot-cutout)"/>
+  <!-- Clean monospace archive watermark string -->
+  <text x="94" y="58" font-family="'IBM Plex Mono', 'Courier New', monospace" font-size="22" font-weight="500" letter-spacing="4" fill="#FFFFFF" fill-opacity="0.92">D/A  ·  DEPT. OF ARTIFACTS  ·  0001</text>
+</svg>

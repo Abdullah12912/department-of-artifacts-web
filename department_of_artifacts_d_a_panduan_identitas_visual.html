@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Department of Artifacts (D/A) — Panduan Identitas Visual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * Design decisions — Department of Artifacts (D/A) Brand Guidelines
+     * - Palette: Krem Berkas (#F3E9D2) 60% canvas, Cokelat Tinta (#24140C) 20% ink & hairlines,
+     *   Oranye Arsip (#E0561B) 12% primary accent, Biru Kosmik (#1D4E9E) & Kuning Sinyal (#E8B53A) 8%.
+     * - Typography: Space Grotesk (primary display & geometric wordmark), Syncopate (wide archival accent),
+     *   IBM Plex Mono (documentary body copy, metadata codes, pricing/form tables).
+     * - Layout: Open archival dossier canvas with clean 1px hairlines, generous whitespace,
+     *   crisp inline SVG logo specimens, zero JavaScript, AAA text contrast (>= 7:1 on primary copy).
+     */
+
+    :root {
+      --cream: #F3E9D2;
+      --cream-deep: #E8DBBE;
+      --paper-light: #FAF4E6;
+      --ink: #24140C;
+      --ink-muted: #523C2F;
+      --ink-line: rgba(36, 20, 12, 0.22);
+      --ink-hairline: rgba(36, 20, 12, 0.12);
+      --orange: #E0561B;
+      --blue: #1D4E9E;
+      --yellow: #E8B53A;
+      --white: #FFFFFF;
+
+      --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-wide: 'Syncopate', 'Space Grotesk', sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--cream);
+      color: var(--ink);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 32px 24px 96px;
+    }
+
+    /* Top archival strip */
+    .archive-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 16px;
+      border-bottom: 1.5px solid var(--ink);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .archive-bar strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--orange);
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    /* Navigation index */
+    .toc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--ink-line);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .toc-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 2px 0;
+      border-bottom: 1.5px solid transparent;
+    }
+
+    .toc-nav a:hover {
+      color: var(--orange);
+      border-bottom-color: var(--orange);
+    }
+
+    /* Masthead / Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+      gap: 40px;
+      align-items: center;
+      padding: 56px 0 52px;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    .hero-kicker {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin: 0 0 14px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.2vw, 4.1rem);
+      font-weight: 700;
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+      margin: 0 0 20px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 .dot {
+      color: var(--orange);
+    }
+
+    .hero-lead {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--ink-muted);
+      max-width: 56ch;
+      margin: 0 0 28px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--ink-line);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-meta span {
+      color: var(--ink-muted);
+    }
+
+    .hero-meta strong {
+      color: var(--ink);
+      font-weight: 600;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .hero-badge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background-color: var(--paper-light);
+      border: 1px solid var(--ink-line);
+    }
+
+    .hero-badge-wrap svg {
+      width: 188px;
+      height: 188px;
+      display: block;
+    }
+
+    .hero-badge-caption {
+      margin-top: 16px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      text-align: center;
+    }
+
+    /* Sections */
+    .section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--ink-line);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 24px;
+      align-items: baseline;
+      margin-bottom: 36px;
+    }
+
+    .section-num {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.8vw, 2.15rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--ink-muted);
+      max-width: 64ch;
+    }
+
+    /* Two-column editorial grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    /* Identity pillars */
+    .pillar {
+      padding-top: 16px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .pillar-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin: 0 0 8px;
+    }
+
+    .pillar h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .pillar p {
+      margin: 0;
+      color: var(--ink-muted);
+    }
+
+    /* Callout note */
+    .note-strip {
+      margin-top: 28px;
+      padding: 18px 22px;
+      background-color: var(--paper-light);
+      border-left: 4px solid var(--orange);
+      font-size: 13.5px;
+    }
+
+    .note-strip strong {
+      color: var(--ink);
+    }
+
+    /* Logo specimens */
+    .specimen-box {
+      border: 1px solid var(--ink-line);
+      background-color: var(--paper-light);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .specimen-stage {
+      padding: 36px 24px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .specimen-stage.dark {
+      background-color: var(--ink);
+    }
+
+    .specimen-stage.orange {
+      background-color: var(--orange);
+    }
+
+    .specimen-stage.blue {
+      background-color: var(--blue);
+    }
+
+    .specimen-stage.cream {
+      background-color: var(--cream);
+    }
+
+    .specimen-footer {
+      padding: 14px 18px;
+      border-top: 1px solid var(--ink-hairline);
+      background-color: var(--cream);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .specimen-footer strong {
+      font-family: var(--font-display);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .specimen-footer span {
+      color: var(--ink-muted);
+    }
+
+    .specimen-wide {
+      margin-top: 24px;
+    }
+
+    .specimen-wide .specimen-stage {
+      min-height: 160px;
+      padding: 36px 32px;
+    }
+
+    /* Color variation mini-row */
+    .subhead {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 40px 0 16px;
+      color: var(--ink);
+    }
+
+    .mini-swatch-stage {
+      padding: 28px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 126px;
+    }
+
+    /* Rules & Do/Don't */
+    .rule-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .rule-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--ink-hairline);
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .rule-list li:last-child {
+      border-bottom: none;
+    }
+
+    .badge-ok {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .badge-no {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* Color proportion bar */
+    .prop-bar {
+      display: flex;
+      height: 44px;
+      width: 100%;
+      border: 1.5px solid var(--ink);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .prop-seg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .prop-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      margin-bottom: 32px;
+    }
+
+    /* Color cards */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .color-card {
+      border: 1px solid var(--ink-line);
+      background-color: var(--paper-light);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .color-chip {
+      height: 112px;
+      padding: 12px;
+      display: flex;
+      align-items: flex-end;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .color-info {
+      padding: 14px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .color-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: var(--ink);
+    }
+
+    .color-code {
+      color: var(--ink-muted);
+      margin: 0 0 8px;
+    }
+
+    .color-role {
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* Typography specimens */
+    .type-card {
+      padding: 28px;
+      background-color: var(--paper-light);
+      border: 1px solid var(--ink-line);
+    }
+
+    .type-sample-display {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin: 12px 0 18px;
+    }
+
+    .type-sample-wide {
+      font-family: var(--font-wide);
+      font-size: clamp(1.1rem, 2.1vw, 1.55rem);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 12px 0 18px;
+    }
+
+    .type-sample-mono {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1.75;
+      margin: 12px 0 18px;
+    }
+
+    /* Clean data table */
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 13px;
+    }
+
+    table.spec-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      padding: 10px 12px;
+      border-bottom: 1.5px solid var(--ink);
+    }
+
+    table.spec-table td {
+      padding: 12px;
+      border-bottom: 1px solid var(--ink-hairline);
+      vertical-align: top;
+    }
+
+    /* Brand voice quotes */
+    .voice-quote {
+      padding: 18px 20px;
+      background-color: var(--paper-light);
+      border: 1px solid var(--ink-line);
+      border-left: 3px solid var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .voice-quote-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .voice-quote p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    /* Mockups */
+    .mockup-frame {
+      border: 1.5px solid var(--ink);
+      background-color: var(--paper-light);
+      overflow: hidden;
+    }
+
+    .mockup-label {
+      padding: 10px 16px;
+      background-color: var(--ink);
+      color: var(--cream);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Instagram mockup */
+    .ig-body {
+      padding: 24px;
+    }
+
+    .ig-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .ig-avatar {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    .ig-handle {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .ig-bio {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: var(--ink-muted);
+      margin: 0;
+    }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 18px;
+    }
+
+    .ig-tile {
+      aspect-ratio: 4 / 5;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--ink-hairline);
+    }
+
+    /* Photo watermark mockup */
+    .photo-stage {
+      position: relative;
+      min-height: 270px;
+      background: linear-gradient(135deg, #3A2518 0%, #5B3823 45%, #8D4B24 78%, #C46A2B 100%);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: var(--cream);
+    }
+
+    .photo-grain-note {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.82;
+    }
+
+    .photo-watermark-corner {
+      align-self: flex-end;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: #FFFFFF;
+      opacity: 0.94;
+    }
+
+    /* Business card & Form mockup */
+    .biz-card {
+      padding: 28px;
+      background-color: var(--cream);
+      min-height: 210px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .biz-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .biz-card-bottom {
+      padding-top: 16px;
+      border-top: 1px solid var(--ink-line);
+      font-size: 12px;
+      color: var(--ink-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .form-sheet {
+      padding: 24px;
+      background-color: var(--paper-light);
+    }
+
+    .form-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 1.5px solid var(--ink);
+      margin-bottom: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .stamp-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1.5px solid var(--orange);
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--ink-line);
+      font-size: 13px;
+    }
+
+    .form-row:last-of-type {
+      border-bottom: none;
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1.5px solid var(--ink);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .section-header,
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .color-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-4 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .color-grid,
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+      .page {
+        padding: 20px 16px 64px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+
+    <!-- Top Archival Strip -->
+    <div class="archive-bar">
+      <div><span class="status-dot"></span><strong>FORM D/A-01</strong> · PANDUAN IDENTITAS VISUAL</div>
+      <div>DEPARTMENT OF ARTIFACTS · EDISI 01</div>
+    </div>
+
+    <!-- Quick Navigation -->
+    <nav class="toc-nav" aria-label="Daftar Isi">
+      <a href="#identitas">01 Identitas</a>
+      <a href="#logo">02 Sistem Logo</a>
+      <a href="#warna">03 Warna</a>
+      <a href="#tipografi">04 Tipografi</a>
+      <a href="#gaya">05 Gaya Foto &amp; Suara</a>
+      <a href="#aplikasi">06 Aplikasi</a>
+    </nav>
+
+    <!-- Masthead / Hero -->
+    <header class="hero">
+      <div>
+        <p class="hero-kicker">Dokumen Acuan Merek · D/A</p>
+        <h1>Department of<br>Artifacts<span class="dot">.</span></h1>
+        <p class="hero-lead">
+          Sistem identitas visual untuk studio fotografi dokumenter yang memperlakukan setiap momen—wisuda, event, hingga wedding—sebagai artefak hidup yang layak diarsipkan dengan tenang, jujur, dan abadi.
+        </p>
+        <div class="hero-meta">
+          <div>
+            <span>Monogram Resmi</span>
+            <strong>D/A · DEPT. OF ARTIFACTS</strong>
+          </div>
+          <div>
+            <span>Fokus Layanan</span>
+            <strong>Wisuda · Event · Wedding</strong>
+          </div>
+          <div>
+            <span>Karakter Visual</span>
+            <strong>Arsip Retro 60-an Minimalis</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-badge-wrap">
+        <svg viewBox="0 0 512 512" role="img" aria-label="Logomark Department of Artifacts">
+          <circle cx="256" cy="256" r="248" fill="#24140C"/>
+          <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+          <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+        </svg>
+        <div class="hero-badge-caption">Lencana Utama · Map Arsip + Titik Oranye</div>
+      </div>
+    </header>
+
+    <!-- 01. IDENTITAS & FILOSOFI -->
+    <section id="identitas" class="section">
+      <div class="section-header">
+        <div class="section-num">01 / Identitas</div>
+        <div>
+          <h2 class="section-title">Filosofi Nama &amp; Monogram</h2>
+          <p class="section-desc">
+            Nama <strong>Department of Artifacts</strong> membawa bobot lembaga arsip luar negeri yang tenang dan serius dalam menjaga kenangan—tanpa harus meminjam ikon kamera yang klise.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="pillar">
+          <p class="pillar-label">Makna Nama</p>
+          <h3>Artefak Hidup</h3>
+          <p>Foto bukan sekadar dokumentasi cepat lewat, melainkan bukti fisik dan emosional dari sebuah babak hidup yang disimpan lintas waktu.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillar-label">Monogram D/A</p>
+          <h3>Garis Miring Klasifikasi</h3>
+          <p>Tanda garis miring (<code>/</code>) berwarna Oranye Arsip berfungsi sebagai pemisah katalog birokrasi sekaligus mewakili kata sambung <em>of</em> secara ringkas.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillar-label">Simbol Map Berkas</p>
+          <h3>Non-Literal &amp; Orisinal</h3>
+          <p>Siluet map berkas arsip (<em>archival folder tab</em>) dengan satu titik indeks oranye menegaskan peran kurator kenangan—berbeda tegas dari ikon lensa maupun prangko.</p>
+        </div>
+      </div>
+
+      <div class="note-strip">
+        <strong>Aturan Penulisan Singkatan:</strong> Selalu gunakan <strong>D/A</strong> atau <strong>DEPT. OF ARTIFACTS</strong> untuk format ringkas. Hindari singkatan tiga huruf <em>DOA</em> agar tidak menimbulkan asosiasi keliru (<em>Dead on Arrival</em>).
+      </div>
+    </section>
+
+    <!-- 02. SISTEM LOGO -->
+    <section id="logo" class="section">
+      <div class="section-header">
+        <div class="section-num">02 / Sistem Logo</div>
+        <div>
+          <h2 class="section-title">Konfigurasi Logo &amp; Aturan Pakai</h2>
+          <p class="section-desc">
+            Tiga konfigurasi utama disiapkan agar identitas tetap tajam mulai dari avatar Instagram berukuran kecil hingga kop dokumen cetak.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Primary Stacked -->
+        <div class="specimen-box">
+          <div class="specimen-stage cream">
+            <svg viewBox="0 0 640 520" width="290" height="236" role="img" aria-label="Logo Utama Stacked">
+              <g transform="translate(192, 24) scale(0.5)">
+                <circle cx="256" cy="256" r="248" fill="#24140C"/>
+                <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+                <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+              </g>
+              <text x="320" y="362" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="600" letter-spacing="10" fill="#24140C">DEPARTMENT OF</text>
+              <text x="324" y="438" text-anchor="middle" font-family="'Space Grotesk', sans-serif" font-size="74" font-weight="700" letter-spacing="4" fill="#24140C">ARTIFACTS<tspan fill="#E0561B">.</tspan></text>
+            </svg>
+          </div>
+          <div class="specimen-footer">
+            <strong>01 · Logo Utama (Stacked)</strong>
+            <span>Sampul, poster, halaman pembuka</span>
+          </div>
+        </div>
+
+        <!-- Logomark Avatar -->
+        <div class="specimen-box">
+          <div class="specimen-stage cream">
+            <svg viewBox="0 0 512 512" width="188" height="188" role="img" aria-label="Logomark Avatar">
+              <circle cx="256" cy="256" r="248" fill="#24140C"/>
+              <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+              <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+            </svg>
+          </div>
+          <div class="specimen-footer">
+            <strong>02 · Logomark / Avatar</strong>
+            <span>Profil IG, favicon, stempel kecil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal Wordmark -->
+      <div class="specimen-box specimen-wide">
+        <div class="specimen-stage cream">
+          <svg viewBox="0 0 1160 220" width="100%" style="max-width: 660px; height: auto;" role="img" aria-label="Wordmark Horizontal D/A">
+            <text x="54" y="164" font-family="'Space Grotesk', sans-serif" font-size="146" font-weight="700" letter-spacing="-2" fill="#24140C">D<tspan fill="#E0561B" dx="4">/</tspan><tspan dx="4">A</tspan></text>
+            <line x1="406" y1="42" x2="406" y2="184" stroke="#24140C" stroke-width="2.5" stroke-opacity="0.35"/>
+            <text x="452" y="102" font-family="'Space Grotesk', sans-serif" font-size="42" font-weight="700" letter-spacing="9" fill="#24140C">DEPARTMENT</text>
+            <text x="452" y="158" font-family="'Space Grotesk', sans-serif" font-size="42" font-weight="500" letter-spacing="9" fill="#24140C">OF ARTIFACTS</text>
+          </svg>
+        </div>
+        <div class="specimen-footer">
+          <strong>03 · Wordmark Horizontal (D/A)</strong>
+          <span>Kop invoice, header website, kartu nama, footer</span>
+        </div>
+      </div>
+
+      <!-- Color Variations -->
+      <h3 class="subhead">Variasi Latar &amp; Warna yang Diperbolehkan</h3>
+      <div class="grid-4">
+        <div class="specimen-box">
+          <div class="mini-swatch-stage dark">
+            <svg viewBox="0 0 512 512" width="76" height="76" aria-label="Versi Terang di atas Cokelat">
+              <circle cx="256" cy="256" r="244" fill="#F3E9D2"/>
+              <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#24140C"/>
+              <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+            </svg>
+          </div>
+          <div class="specimen-footer"><span>Krem di atas Cokelat</span></div>
+        </div>
+
+        <div class="specimen-box">
+          <div class="mini-swatch-stage orange">
+            <svg viewBox="0 0 512 512" width="76" height="76" aria-label="Versi Cokelat di atas Oranye">
+              <circle cx="256" cy="256" r="244" fill="#24140C"/>
+              <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+              <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+            </svg>
+          </div>
+          <div class="specimen-footer"><span>Di atas Oranye Arsip</span></div>
+        </div>
+
+        <div class="specimen-box">
+          <div class="mini-swatch-stage blue">
+            <svg viewBox="0 0 512 512" width="76" height="76" aria-label="Versi di atas Biru Kosmik">
+              <circle cx="256" cy="256" r="244" fill="#F3E9D2"/>
+              <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#1D4E9E"/>
+              <circle cx="348" cy="236" r="22" fill="#E8B53A"/>
+            </svg>
+          </div>
+          <div class="specimen-footer"><span>Di atas Biru Kosmik</span></div>
+        </div>
+
+        <div class="specimen-box">
+          <div class="mini-swatch-stage dark">
+            <svg viewBox="0 0 512 512" width="76" height="76" aria-label="Versi Monokrom Putih">
+              <defs>
+                <mask id="mono-cut">
+                  <rect width="512" height="512" fill="white"/>
+                  <circle cx="348" cy="236" r="22" fill="black"/>
+                </mask>
+              </defs>
+              <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#FFFFFF" mask="url(#mono-cut)"/>
+            </svg>
+          </div>
+          <div class="specimen-footer"><span>Monokrom Watermark</span></div>
+        </div>
+      </div>
+
+      <!-- Technical rules & Don'ts -->
+      <div class="grid-2" style="margin-top: 32px;">
+        <div>
+          <h3 class="subhead" style="margin-top: 0;">Standar Teknis (Wajib)</h3>
+          <ul class="rule-list">
+            <li><span class="badge-ok">[OK]</span><span><strong>Ruang aman:</strong> Sisakan jarak bebas minimal selebar 1× diameter titik oranye di keempat sisi logo.</span></li>
+            <li><span class="badge-ok">[OK]</span><span><strong>Ukuran minimum lencana:</strong> 24 px untuk media digital dan 10 mm untuk media cetak.</span></li>
+            <li><span class="badge-ok">[OK]</span><span><strong>Avatar tanpa teks:</strong> Pada ukuran profil bulat (Instagram/WhatsApp), gunakan lencana map arsip saja tanpa teks tambahan.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="subhead" style="margin-top: 0;">Larangan Penggunaan</h3>
+          <ul class="rule-list">
+            <li><span class="badge-no">[NO]</span><span>Jangan memutar, memiringkan, atau menarik proporsi logo secara tidak simetris.</span></li>
+            <li><span class="badge-no">[NO]</span><span>Jangan menambahkan bayangan (<em>drop shadow</em>), gradasi, garis luar tebal, atau efek 3D.</span></li>
+            <li><span class="badge-no">[NO]</span><span>Jangan menaruh logo berwarna langsung di atas area foto yang ramai tanpa kontras cukup atau blok warna.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03. PALET WARNA -->
+    <section id="warna" class="section">
+      <div class="section-header">
+        <div class="section-num">03 / Warna</div>
+        <div>
+          <h2 class="section-title">Palet &amp; Proporsi Warna</h2>
+          <p class="section-desc">
+            Dominasi krem kertas arsip dan cokelat tinta menjaga kesan hangat dan tenang, sementara Oranye Arsip bekerja sebagai tanda indeks yang tegas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Proportion Bar -->
+      <div class="prop-bar" role="img" aria-label="Proporsi warna: 60% Krem Berkas, 20% Cokelat Tinta, 12% Oranye Arsip, 8% Biru Kosmik dan Kuning Sinyal">
+        <div class="prop-seg" style="width: 60%; background: #F3E9D2; color: #24140C;">60%</div>
+        <div class="prop-seg" style="width: 20%; background: #24140C; color: #F3E9D2;">20%</div>
+        <div class="prop-seg" style="width: 12%; background: #E0561B; color: #FAF4E6;">12%</div>
+        <div class="prop-seg" style="width: 5%; background: #1D4E9E; color: #FAF4E6;">5%</div>
+        <div class="prop-seg" style="width: 3%; background: #E8B53A; color: #24140C;">3%</div>
+      </div>
+      <div class="prop-legend">
+        <span><strong>60%</strong> Krem Berkas (Latar Utama)</span>
+        <span><strong>20%</strong> Cokelat Tinta (Teks &amp; Garis)</span>
+        <span><strong>12%</strong> Oranye Arsip (Aksen Utama)</span>
+        <span><strong>8%</strong> Biru Kosmik &amp; Kuning Sinyal (Sekunder &amp; Highlight)</span>
+      </div>
+
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-chip" style="background: #F3E9D2; color: #24140C;">#F3E9D2</div>
+          <div class="color-info">
+            <p class="color-name">Krem Berkas</p>
+            <p class="color-code">RGB 243, 233, 210</p>
+            <p class="color-role">Latar utama halaman, kertas formulir, dan siluet map arsip.</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-chip" style="background: #24140C; color: #F3E9D2;">#24140C</div>
+          <div class="color-info">
+            <p class="color-name">Cokelat Tinta</p>
+            <p class="color-code">RGB 36, 20, 12</p>
+            <p class="color-role">Teks utama, garis pemisah, dan lingkaran lencana dasar.</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-chip" style="background: #E0561B; color: #FAF4E6;">#E0561B</div>
+          <div class="color-info">
+            <p class="color-name">Oranye Arsip</p>
+            <p class="color-code">RGB 224, 86, 27</p>
+            <p class="color-role">Titik indeks logo, garis miring D/A, stempel, dan penekanan.</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-chip" style="background: #1D4E9E; color: #FAF4E6;">#1D4E9E</div>
+          <div class="color-info">
+            <p class="color-name">Biru Kosmik</p>
+            <p class="color-code">RGB 29, 78, 158</p>
+            <p class="color-role">Aksen sekunder, label kategori arsip, atau blok latar alternatif.</p>
+          </div>
+        </div>
+
+        <div class="color-card">
+          <div class="color-chip" style="background: #E8B53A; color: #24140C;">#E8B53A</div>
+          <div class="color-info">
+            <p class="color-name">Kuning Sinyal</p>
+            <p class="color-code">RGB 232, 181, 58</p>
+            <p class="color-role">Penanda kecil, stiker status, dan highlight minimalis.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-strip">
+        <strong>Aturan Kontras Teks Kecil:</strong> Teks berukuran kecil hanya boleh menggunakan <strong>Cokelat Tinta (#24140C) di atas Krem Berkas (#F3E9D2)</strong>, atau <strong>Krem Berkas (#F3E9D2) di atas Cokelat Tinta (#24140C) / Biru Kosmik (#1D4E9E)</strong>.
+      </div>
+    </section>
+
+    <!-- 04. TIPOGRAFI -->
+    <section id="tipografi" class="section">
+      <div class="section-header">
+        <div class="section-num">04 / Tipografi</div>
+        <div>
+          <h2 class="section-title">Sistem Huruf &amp; Hierarki</h2>
+          <p class="section-desc">
+            Perpaduan huruf geometris yang kokoh untuk nama departemen dan huruf monospace mesin tik arsip untuk segala catatan, kode berkas, dan harga paket.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="type-card">
+          <p class="pillar-label">Display Utama · Wordmark &amp; Judul</p>
+          <div class="type-sample-display">Space Grotesk Bold<br>D/A · ARTIFACTS.</div>
+          <p style="margin: 0; color: var(--ink-muted);">
+            Digunakan untuk wordmark <strong>DEPARTMENT OF ARTIFACTS</strong>, monogram <strong>D/A</strong>, dan tajuk utama. Huruf kapital dengan spasi lega memberi wibawa editorial modern. Alternatif judul lebar: <strong style="font-family: var(--font-wide); font-size: 12px; color: var(--ink);">SYNCOPATE BOLD</strong>.
+          </p>
+        </div>
+
+        <div class="type-card">
+          <p class="pillar-label">Teks Isi &amp; Label Arsip</p>
+          <div class="type-sample-mono">
+            <strong>IBM Plex Mono · Regular / SemiBold</strong><br>
+            FORM D/A-04 · STATUS: DIARSIPKAN<br>
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+            0123456789 · #0001 · IDR [HARGA]
+          </div>
+          <p style="margin: 0; color: var(--ink-muted);">
+            Digunakan untuk paragraf isi, caption media sosial, penomoran berkas foto, watermark, dan rincian paket layanan.
+          </p>
+        </div>
+      </div>
+
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Peran</th>
+            <th>Font &amp; Bobot</th>
+            <th>Ukuran / Spasi</th>
+            <th>Contoh Penggunaan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Judul Utama</strong></td>
+            <td>Space Grotesk Bold (700)</td>
+            <td>32–64 px · Kapital · +0.02em</td>
+            <td>Sampul presentasi, tajuk poster, nama layanan</td>
+          </tr>
+          <tr>
+            <td><strong>Label Seksi / Kicker</strong></td>
+            <td>IBM Plex Mono SemiBold (600)</td>
+            <td>12 px · Kapital · +0.12em</td>
+            <td><code>FORM D/A-PKT</code>, nomor bab, tag kategori</td>
+          </tr>
+          <tr>
+            <td><strong>Teks Isi &amp; Caption</strong></td>
+            <td>IBM Plex Mono Regular (400)</td>
+            <td>13–15 px · Line-height 1.7</td>
+            <td>Deskripsi paket, caption Instagram, catatan klien</td>
+          </tr>
+          <tr>
+            <td><strong>Watermark Foto</strong></td>
+            <td>IBM Plex Mono Medium (500)</td>
+            <td>Kecil &amp; lega · +0.16em</td>
+            <td><code>D/A · 0001</code> atau <code>DEPT. OF ARTIFACTS · 0001</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 05. GAYA FOTO & SUARA MEREK -->
+    <section id="gaya" class="section">
+      <div class="section-header">
+        <div class="section-num">05 / Gaya Foto &amp; Suara</div>
+        <div>
+          <h2 class="section-title">Arahan Visual &amp; Nada Komunikasi</h2>
+          <p class="section-desc">
+            Identitas visual harus terasa menyatu dengan hasil fotonya: hangat, jujur, dan berbicara dengan gaya birokrasi retro 60-an yang singkat serta berkarakter.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3 class="subhead" style="margin-top: 0;">Gaya Fotografi Dokumenter</h3>
+          <ul class="rule-list">
+            <li><span class="badge-ok">01</span><span><strong>Apa adanya &amp; candid:</strong> Tangkap ekspresi spontan dan dinamika ruang tanpa arahan pose yang kaku.</span></li>
+            <li><span class="badge-ok">02</span><span><strong>Cahaya &amp; tekstur:</strong> Utamakan cahaya alami, grain film halus, serta komposisi miring atau asimetris yang hidup.</span></li>
+            <li><span class="badge-ok">03</span><span><strong>Tone warna hangat:</strong> Bayangan bernuansa cokelat lembut dengan highlight hangat keoranyean, selaras dengan palet merek.</span></li>
+            <li><span class="badge-no">04</span><span><strong>Hindari:</strong> Filter warna ekstrem, kulit terlalu halus, dan efek HDR yang berlebihan.</span></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="subhead" style="margin-top: 0;">Suara Merek (Brand Voice)</h3>
+          <div class="voice-quote">
+            <div class="voice-quote-label">Konfirmasi Booking</div>
+            <p>"Order diterima. Status: sedang diabadikan."</p>
+          </div>
+          <div class="voice-quote">
+            <div class="voice-quote-label">Pengiriman Galeri Klien</div>
+            <p>"Berkas artefak Anda telah kami arsipkan. Kode akses terlampir."</p>
+          </div>
+          <div class="voice-quote">
+            <div class="voice-quote-label">Caption Portofolio</div>
+            <p>"Arsip Wisuda #0042 — Cuaca mendung, tawa tidak tertahan. Disimpan permanen."</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06. APLIKASI & MOCKUP -->
+    <section id="aplikasi" class="section">
+      <div class="section-header">
+        <div class="section-num">06 / Aplikasi</div>
+        <div>
+          <h2 class="section-title">Penerapan pada Media Nyata</h2>
+          <p class="section-desc">
+            Contoh implementasi identitas Department of Artifacts di Instagram, watermark hasil foto, kartu nama, dan lembar paket klien.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Instagram Mockup -->
+        <div class="mockup-frame">
+          <div class="mockup-label">
+            <span>Mockup 01 · Profil Instagram</span>
+            <span>DIGITAL</span>
+          </div>
+          <div class="ig-body">
+            <div class="ig-header">
+              <svg class="ig-avatar" viewBox="0 0 512 512" role="img" aria-label="Avatar Instagram D/A">
+                <circle cx="256" cy="256" r="248" fill="#24140C"/>
+                <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+                <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+              </svg>
+              <div>
+                <p class="ig-handle">@[HANDLE_IG]</p>
+                <p class="ig-bio">
+                  <strong>Department of Artifacts</strong><br>
+                  Fotografi Dokumenter · Wisuda · Event · Wedding<br>
+                  Mengarsipkan momen sebagaimana adanya.<br>
+                  [KOTA] · Booking via tautan di bawah
+                </p>
+              </div>
+            </div>
+
+            <div class="ig-grid">
+              <div class="ig-tile" style="background: linear-gradient(160deg, #4B2E1E, #B55B27); padding: 10px; display: flex; align-items: flex-end;">
+                <span style="color: #FAF4E6; font-size: 12px; letter-spacing: 0.06em;">#0041</span>
+              </div>
+              <div class="ig-tile" style="background: linear-gradient(160deg, #24140C, #6A4934); padding: 10px; display: flex; align-items: flex-end;">
+                <span style="color: #FAF4E6; font-size: 12px; letter-spacing: 0.06em;">#0042</span>
+              </div>
+              <div class="ig-tile" style="background: linear-gradient(160deg, #1D4E9E, #24140C); padding: 10px; display: flex; align-items: flex-end;">
+                <span style="color: #FAF4E6; font-size: 12px; letter-spacing: 0.06em;">#0043</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo Watermark Mockup -->
+        <div class="mockup-frame">
+          <div class="mockup-label">
+            <span>Mockup 02 · Watermark Foto</span>
+            <span>POJOK KANAN BAWAH</span>
+          </div>
+          <div class="photo-stage">
+            <div class="photo-grain-note">SIMULASI FRAME DOKUMENTER · WARM FILM TONE</div>
+            <div style="text-align: center; opacity: 0.35; font-family: var(--font-display); font-size: 13px; letter-spacing: 0.14em;">[ AREA FOTO KLIEN ]</div>
+            <div class="photo-watermark-corner">
+              <svg viewBox="0 0 80 60" width="22" height="17" aria-hidden="true">
+                <defs>
+                  <mask id="wm-cut">
+                    <rect width="80" height="60" fill="white"/>
+                    <circle cx="56" cy="24" r="6" fill="black"/>
+                  </mask>
+                </defs>
+                <path d="M12 8 H32 C35 8 37 10 38 12 L41 16 C42 17 44 18 46 18 H68 C71 18 73 20 73 23 V49 C73 52 71 54 68 54 H12 C9 54 7 52 7 49 V13 C7 10 9 8 12 8 Z" fill="#FFFFFF" mask="url(#wm-cut)"/>
+              </svg>
+              <span>D/A · 0001</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Business Card Mockup -->
+        <div class="mockup-frame">
+          <div class="mockup-label">
+            <span>Mockup 03 · Kartu Nama</span>
+            <span>90 × 55 MM · KERTAS KREM</span>
+          </div>
+          <div class="biz-card">
+            <div class="biz-card-top">
+              <div>
+                <div style="font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.1;">
+                  DEPARTMENT OF<br>ARTIFACTS<span style="color: #E0561B;">.</span>
+                </div>
+                <div style="font-size: 12px; color: var(--ink-muted); margin-top: 6px;">Fotografi Dokumenter</div>
+              </div>
+              <svg viewBox="0 0 512 512" width="44" height="44" aria-hidden="true">
+                <circle cx="256" cy="256" r="248" fill="#24140C"/>
+                <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+                <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+              </svg>
+            </div>
+            <div class="biz-card-bottom">
+              <span><strong>[NAMA]</strong></span>
+              <span>[WHATSAPP] · @[IG]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice / Package Form Mockup -->
+        <div class="mockup-frame">
+          <div class="mockup-label">
+            <span>Mockup 04 · Lembar Paket / Invoice</span>
+            <span>FORM D/A-PKT</span>
+          </div>
+          <div class="form-sheet">
+            <div class="form-head">
+              <strong>D/A · FORM D/A-PKT</strong>
+              <span class="stamp-pill">DIARSIPKAN</span>
+            </div>
+            <div class="form-row">
+              <span>Kategori Sesi</span>
+              <strong>Wisuda / Event / Wedding</strong>
+            </div>
+            <div class="form-row">
+              <span>Estimasi Biaya</span>
+              <strong>[HARGA PAKET]</strong>
+            </div>
+            <div class="form-row">
+              <span>Pengiriman Berkas</span>
+              <strong>Galeri Digital + Arsip Nomor Seri</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="doc-footer">
+      <div>DEPARTMENT OF ARTIFACTS (D/A) · PANDUAN IDENTITAS VISUAL</div>
+      <div>FORM D/A-01 · DOKUMEN INTERNAL MEREK</div>
+    </footer>
+
+  </main>
+</body>
+</html>

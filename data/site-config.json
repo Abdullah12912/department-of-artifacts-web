@@ -1,0 +1,204 @@
+{
+  "brand": {
+    "name": "Department of Artifacts",
+    "shortName": "Dept. of Artifacts",
+    "monogramLeft": "D",
+    "monogramRight": "A",
+    "formCode": "FORM D/A-WEB",
+    "subtitle": "STUDIO FOTOGRAFI DOKUMENTER",
+    "city": "Bandung",
+    "serviceArea": "Bandung & Sekitarnya",
+    "instagram": "dept.of.artifacts",
+    "whatsapp": "0812-3456-7890",
+    "whatsappNumber": "6281234567890",
+    "email": "arsip@deptofartifacts.id",
+    "hours": "09.00 – 20.00 WIB",
+    "metaDescription": "Studio fotografi dokumenter untuk wisuda, wedding, dan event. Mengarsipkan momen sebagaimana adanya."
+  },
+  "theme": {
+    "cream": "#F3E9D2",
+    "creamDeep": "#E8DBBE",
+    "paper": "#FAF4E6",
+    "ink": "#24140C",
+    "inkMuted": "#523C2F",
+    "orange": "#E0561B",
+    "orangeDark": "#C24612",
+    "blue": "#1D4E9E",
+    "yellow": "#E8B53A",
+    "radius": 4
+  },
+  "sections": {
+    "hero": true,
+    "archives": true,
+    "services": true,
+    "process": true,
+    "booking": true
+  },
+  "hero": {
+    "kicker": "Department of Artifacts · D/A",
+    "headline": "Mengarsipkan Momen Sebagaimana Adanya",
+    "description": "Kami tidak mengatur pose kaku. Kami mencatat cahaya alami, tawa spontan, dan detail kecil hari penting Anda sebagai artefak visual yang hangat dan jujur lintas waktu.",
+    "primaryCta": "Ajukan Berkas Sesi",
+    "secondaryCta": "Lihat Arsip",
+    "image": "/uploads/hero-jamuan.jpg",
+    "imageAlt": "Dokumentasi jamuan outdoor hangat Department of Artifacts",
+    "watermark": "D/A · 0001",
+    "captionLeft": "ARSIP #0001 · JAMUAN KELUARGA & INTIMATE RECEPTION",
+    "captionRight": "CAHAYA ALAMI · WARM 35MM TONE · STATUS: DIARSIPKAN"
+  },
+  "archiveSection": {
+    "kicker": "01 / Katalog Arsip",
+    "title": "Rekam Jejak Pilihan",
+    "description": "Setiap sesi diberi nomor katalog permanen. Klik kartu arsip untuk memeriksa catatan lapangan dan karakter visualnya.",
+    "categories": [
+      "Wisuda",
+      "Wedding",
+      "Event"
+    ]
+  },
+  "archives": [
+    {
+      "uid": "arc-0042",
+      "id": "0042",
+      "category": "Wisuda",
+      "title": "Sore di Selasar Kampus",
+      "location": "Halaman Gedung Utama",
+      "light": "Cahaya Matahari Sore · 35mm Warm",
+      "excerpt": "Tawa lepas selepas sidang senat—tanpa aba-aba kamera, tepat saat teman seangkatan berdatangan.",
+      "notes": "Diabadikan sepenuhnya dengan cahaya alami menjelang pukul 16.30. Fokus pada interaksi spontan antara wisudawati, keluarga, dan sahabat lama di koridor bata.",
+      "image": "/uploads/arsip-0042-wisuda.jpg",
+      "visible": true
+    },
+    {
+      "uid": "arc-0039",
+      "id": "0039",
+      "category": "Wedding",
+      "title": "Langkah di Pendopo Lama",
+      "location": "Rumah Heritage · Sesi Akad",
+      "light": "Natural Courtyard Light · Portra Tone",
+      "excerpt": "Dua menit tenang seusai akad, berjalan beriringan melewati halaman batu sebelum menyambut tamu.",
+      "notes": "Momen jeda singkat yang paling berharga di hari pernikahan. Tanpa pengaturan kaku—hanya ritme langkah alami dan sorot hangat di beranda tua.",
+      "image": "/uploads/arsip-0039-wedding.jpg",
+      "visible": true
+    },
+    {
+      "uid": "arc-0044",
+      "id": "0044",
+      "category": "Event",
+      "title": "Malam Akustik Ruang Kayu",
+      "location": "Kedai & Ruang Kolektif",
+      "light": "Lampu Tungsten Hangat · High ISO Grain",
+      "excerpt": "Obrolan pelan, petikan gitar akustik, dan suasana akrab di bawah lampu gantung temaram.",
+      "notes": "Liputan acara komunitas malam hari dengan mempertahankan karakter lampu kuning asli ruangan serta tekstur grain film yang organik.",
+      "image": "/uploads/arsip-0044-event.jpg",
+      "visible": true
+    },
+    {
+      "uid": "arc-0041",
+      "id": "0041",
+      "category": "Wedding",
+      "title": "Meja Panjang Menjelang Senja",
+      "location": "Taman Belakang · Intimate Reception",
+      "light": "Golden Hour Backlight · Documentary",
+      "excerpt": "Jamuan makan malam keluarga besar yang cair, hangat, dan penuh cerita di satu meja kayu panjang.",
+      "notes": "Mengutamakan bingkai lebar dokumenter agar seluruh ekspresi tamu, detail hidangan, dan pendar cahaya sore terekam dalam satu tarikan napas.",
+      "image": "/uploads/arsip-0041-wedding.jpg",
+      "visible": true
+    }
+  ],
+  "servicesSection": {
+    "kicker": "02 / Layanan",
+    "title": "Klasifikasi Sesi & Paket",
+    "description": "Tiga kategori utama dengan alur pengarsipan yang rapi. Pilih kategori untuk langsung mengisi formulir pengajuan di bawah."
+  },
+  "services": [
+    {
+      "uid": "srv-wisuda",
+      "formCode": "FORM D/A-WSD",
+      "badge": "SESI SINGKAT",
+      "name": "Wisuda",
+      "description": "Dokumentasi kelulusan bersama keluarga dan sahabat tanpa arahan pose yang dibuat-buat.",
+      "features": [
+        "Liputan candid area kampus & ruang berkumpul",
+        "Olahan warna hangat bertekstur grain halus",
+        "Galeri digital arsip bernomor seri (siap unduh)",
+        "Estimasi serah terima berkas 3–5 hari kerja"
+      ],
+      "price": "Mulai Rp 1.250.000",
+      "featured": false,
+      "ctaLabel": "Pilih Sesi Wisuda"
+    },
+    {
+      "uid": "srv-wedding",
+      "formCode": "FORM D/A-WDD",
+      "badge": "ARSIP UTAMA",
+      "name": "Wedding",
+      "description": "Pencatatan utuh akad, pemberkatan, hingga jamuan intim dengan fokus pada emosi dan interaksi nyata.",
+      "features": [
+        "Liputan dokumenter penuh dari persiapan hingga resepsi",
+        "Komposisi editorial asimetris & cahaya natural",
+        "Arsip digital resolusi tinggi + pilihan cetak kontak",
+        "Ringkasan highlight cepat dalam 48 jam"
+      ],
+      "price": "Mulai Rp 4.500.000",
+      "featured": true,
+      "ctaLabel": "Pilih Sesi Wedding"
+    },
+    {
+      "uid": "srv-event",
+      "formCode": "FORM D/A-EVT",
+      "badge": "DOKUMENTER",
+      "name": "Event",
+      "description": "Untuk pameran, pertunjukan musik intim, diskusi kreatif, hingga perayaan komunitas.",
+      "features": [
+        "Rekam atmosfer ruang, audiens, dan momen panggung",
+        "Adaptif di pencahayaan redup / tungsten hangat",
+        "Katalog foto terkurasi siap publikasi media sosial",
+        "Pengiriman berkas terstruktur per segmen acara"
+      ],
+      "price": "Mulai Rp 1.850.000",
+      "featured": false,
+      "ctaLabel": "Pilih Sesi Event"
+    }
+  ],
+  "processSection": {
+    "kicker": "03 / Prosedur",
+    "title": "Alur Kerja Pengarsipan",
+    "description": "Ringkas, transparan, dan terukur dari penerimaan jadwal hingga berkas foto masuk ke ruang simpan Anda.",
+    "steps": [
+      {
+        "code": "Tahap 01 · Registrasi",
+        "title": "Penerimaan Berkas",
+        "description": "Anda mengisi formulir tanggal dan kategori acara. Kami memeriksa ketersediaan jadwal dan mengirimkan lembar detail paket resmi (FORM D/A-PKT)."
+      },
+      {
+        "code": "Tahap 02 · Lapangan",
+        "title": "Pengabadian Tenang",
+        "description": "Pada hari-H kami bergerak senyap mengikuti ritme acara—menangkap gestur, cahaya, dan percakapan tanpa mengganggu jalannya momen."
+      },
+      {
+        "code": "Tahap 03 · Kurasi",
+        "title": "Pengarsipan Permanen",
+        "description": "Seluruh foto melalui seleksi ketat dan pewarnaan hangat khas D/A, lalu diserahkan melalui galeri digital bernomor katalog pribadi."
+      }
+    ],
+    "quote": "\"Order diterima. Status: sedang diabadikan. Tugas kami sederhana—memastikan hari baik Anda tetap terasa hangat sepuluh tahun dari sekarang.\"",
+    "stamp": "BERKAS TERVERIFIKASI"
+  },
+  "bookingSection": {
+    "kicker": "04 / Pengajuan",
+    "title": "Formulir Jadwal Sesi",
+    "description": "Isi detail singkat rencana acara Anda. Sistem akan menerbitkan nomor resi pengajuan yang siap disalin dan dikirim langsung ke WhatsApp studio.",
+    "infoTitle": "Meja Administrasi D/A",
+    "infoDescription": "Jadwal liputan terbatas setiap bulannya agar setiap berkas mendapat perhatian kurasi penuh. Silakan ajukan minimal 2 minggu sebelum hari-H.",
+    "formCode": "FORM D/A-BKG · PENGAJUAN JADWAL",
+    "formBadge": "RESI OTOMATIS",
+    "submitLabel": "Terbitkan Resi Pengajuan",
+    "helperText": "Gratis konsultasi jadwal & rate card.",
+    "addons": [
+      "Cetak Contact Sheet",
+      "Rol Film 35mm Analog",
+      "Ekstra Jam Liputan"
+    ]
+  }
+}

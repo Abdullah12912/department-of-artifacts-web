@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 720" width="800" height="720" role="img" aria-label="Department of Artifacts Primary Logo">
+  <title>Department of Artifacts — Primary Stacked Logo</title>
+  <!-- Circular Logomark -->
+  <g transform="translate(248, 72) scale(0.59375)">
+    <circle cx="256" cy="256" r="248" fill="#24140C"/>
+    <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+    <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+  </g>
+  <!-- Stacked Typography -->
+  <text x="400" y="476" text-anchor="middle" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="11" fill="#24140C">DEPARTMENT OF</text>
+  <text x="404" y="562" text-anchor="middle" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="84" font-weight="700" letter-spacing="5" fill="#24140C">ARTIFACTS<tspan fill="#E0561B">.</tspan></text>
+</svg>

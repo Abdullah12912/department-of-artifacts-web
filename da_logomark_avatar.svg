@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Department of Artifacts Logomark">
+  <title>Department of Artifacts — Logomark</title>
+  <!-- Matte Cokelat Tinta circular badge -->
+  <circle cx="256" cy="256" r="248" fill="#24140C"/>
+  <!-- Minimalist archival folder tab silhouette in Krem Berkas -->
+  <path d="M130 156 H222 C232 156 238 161 243 169 L251 181 C254 186 259 188 266 188 H382 C390 188 396 194 396 202 V346 C396 354 390 360 382 360 H130 C122 360 116 354 116 346 V170 C116 162 122 156 130 156 Z" fill="#F3E9D2"/>
+  <!-- Single Oranye Arsip index dot -->
+  <circle cx="348" cy="236" r="22" fill="#E0561B"/>
+</svg>

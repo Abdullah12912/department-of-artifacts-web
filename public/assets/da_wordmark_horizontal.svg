@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 280" width="1160" height="280" role="img" aria-label="Department of Artifacts Horizontal Wordmark">
+  <title>Department of Artifacts — Horizontal Monogram &amp; Wordmark</title>
+  <!-- Bold D/A Monogram with burnt orange slash -->
+  <text x="64" y="192" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="152" font-weight="700" letter-spacing="-2" fill="#24140C">D<tspan fill="#E0561B" dx="4" dy="0">/</tspan><tspan dx="4" dy="0">A</tspan></text>
+  <!-- Hairline Divider -->
+  <line x1="416" y1="68" x2="416" y2="212" stroke="#24140C" stroke-width="2.5" stroke-opacity="0.35"/>
+  <!-- Stacked Formal Wordmark -->
+  <text x="462" y="128" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="9" fill="#24140C">DEPARTMENT</text>
+  <text x="462" y="186" font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="500" letter-spacing="9" fill="#24140C">OF ARTIFACTS</text>
+</svg>
